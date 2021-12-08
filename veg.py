@@ -54,7 +54,7 @@ kv = '''
                 orientation:'vertical'
                 id: Bod
                 FitImage:
-                    source:'pizza.png'
+                    source:'assets/pics/pizza.png'
                     size:self.size
                     pos:self.pos
             MDFloatLayout:
@@ -72,7 +72,7 @@ kv = '''
                         font_size:'30sp'
                         font_name: "assets/fonts/Poppins-ExtraBold.ttf"
                     Image:
-                        source:'leaf.png'
+                        source:'assets/pics/leaf.png'
                         size_hint:(None,None)
                         width:'30dp'
                         pos_hint:{'center_y':.6}
@@ -270,7 +270,7 @@ kv = '''
                                     size_hint:(None,None)
                                     width:'120dp'
                                     FitImage:
-                                        source:'carb.png'
+                                        source:'assets/pics/carb.png'
                                         size_hint:(None,None)
                                         width:'120dp'
                                         height:'150dp'
@@ -359,7 +359,7 @@ kv = '''
                                     size_hint:(None,None)
                                     width:'120dp'
                                     FitImage:
-                                        source:'meatballs.png'
+                                        source:'assets/pics/meatballs.png'
                                         size_hint:(None,None)
                                         width:'120dp'
                                         height:'150dp'
@@ -455,7 +455,7 @@ kv = '''
                                     size_hint:(None,None)
                                     width:'120dp'
                                     FitImage:
-                                        source:'spinach pizza.png'
+                                        source:'assets/pics/spinach pizza.png'
                                         size_hint:(None,None)
                                         width:'120dp'
                                         height:'150dp'
@@ -579,7 +579,7 @@ kv = '''
                         screen_manager:screen_manager
                         RecipeCard:
                             FitImage:
-                                source:"carb.png"
+                                source:"assets/pics/carb.png"
                         MDLabel:
                             text: 'Method'
                             color:gch("#000000")
