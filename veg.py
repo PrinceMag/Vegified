@@ -35,6 +35,7 @@ from kivy.uix.screenmanager import FadeTransition, ScreenManager
 from kivy.uix.button import Button
 from kivy.utils import get_color_from_hex
 from kivymd.color_definitions import colors
+from kivymd_extensions.akivymd.uix.rating import AKRating
 register('MatIcons',join(dirname(__file__),'assets/fonts/Material-Design-Iconic-Font.ttf'),join(dirname(__file__),'assets/fonts/zmd.fontd'))
 # register('MatIcons',join(dirname(__file__),'assets/fonts/fontawesome.ttf'),join(dirname(__file__),'assets/fonts/fontawesome.fontd'))
 
@@ -575,41 +576,114 @@ kv = '''
                         height: self.minimum_height
                         row_default_height: 5
                         size_hint_y:None
-                        spacing:dp(10)
+                        padding:20,0,20,0
                         screen_manager:screen_manager
                         RecipeCard:
                             FitImage:
                                 source:"assets/pics/carb.png"
                         MDLabel:
-                            text: 'Method'
+                            text: 'Vegan Spinach Pizza'
                             color:gch("#000000")
                             size_hint_y:None
                             height:'50dp'
                             font_size:'25sp'
+                            font_name: "assets/fonts/Poppins-ExtraBold.ttf"
+                        AKRating:
+                            theme_text_color: "Custom"
+                            text_color: gch("#64dd17")
+                            active_color: gch("#64dd17")
+                            animation_type: 'grow'
+                            size_hint_y:None
+                            height:'50dp'
+                            on_rate: print(self.get_rate())
+
+                        MDBoxLayout:
+                            size_hint_y:None
+                            height:'50dp'
+                            MDIconButton:
+                                id:fork
+                                icon: 'silverware-fork-knife'
+                                user_font_size: "25sp"
+                                theme_text_color: "Custom"
+                                text_color: gch("#000000")
+                                size_hint:(None,None)
+                                height:'30dp'
+                                width:'80dp'
+                                pos_hint:{'center_y':.5}
+                            MDLabel:
+                                text:'Prep 10 mins'
+                                color:gch("#000000")
+                                size_hint:(None,None)
+                                height:'30dp'
+                                width:'80dp'
+                                pos_hint:{'center_y':.5}
+                                font_size:'12sp'
+                                font_name: "assets/fonts/Poppins-Regular.ttf"
+                            
+                            MDIconButton:
+                                icon: 'clock-time-nine-outline'
+                                user_font_size: "25sp"
+                                theme_text_color: "Custom"
+                                text_color: gch("#000000")
+                                size_hint:(None,None)
+                                height:'30dp'
+                                width:'80dp'
+                                pos_hint:{'center_y':.5}
+                            MDLabel:
+                                text:'Cook 30 mins'
+                                color:gch("#000000")
+                                size_hint:(None,None)
+                                height:'30dp'
+                                width:'100dp'
+                                pos_hint:{'center_y':.5}
+                                font_size:'12sp'
+                                font_name: "assets/fonts/Poppins-Regular.ttf"
+                            MDLabel:
+                                text:''
+                                size_hint_x:.6
+                            MDIconButton:
+                                icon: 'heart-plus'
+                                user_font_size: "25sp"
+                                theme_text_color: "Custom"
+                                text_color: gch("#64dd17")
+                                size_hint:(None,None)
+                                height:'30dp'
+                                pos_hint:{'center_y':.5}
+                            
+                        MDLabel:
+                            text: 'Method'
+                            color:gch("#000000")
+                            size_hint_y:None
+                            height:'40dp'
+                            font_size:'18sp'
                             pos_hint: {"center_x": .2}
                             font_name: "assets/fonts/Poppins-ExtraBold.ttf"
                         MDLabel:
-                            text: 'Preheat the oven to 180°C/350°F/Gas mark 4. To make the croûtons, and brushboth sides of each slice with the oil.'
+                            id:reccipe
+                            text: ""
                             color:gch("#000000")
+                            font_size:'15sp'
                             size_hint_y:None
                             height:'50dp'
-                            font_size:'15sp'
                             pos_hint: {"center_x": .2}
                             font_name: "assets/fonts/Poppins-Regular.ttf"
+                            icon: "fontawesome.icons['arrow-right']"
+
+            
                         
                         MDLabel:
                             text: 'Ingredients'
                             color:gch("#000000")
                             size_hint_y:None
-                            height:'50dp'
-                            font_size:'25sp'
+                            height:'80dp'
+                            font_size:'18sp'
                             pos_hint: {"center_x": .2}
                             font_name: "assets/fonts/Poppins-ExtraBold.ttf"
                         ScrollView:
                             do_scroll_y: False
                             bar_widget:1
                             size_hint_y:None
-                            height:'200dp'
+                            height:'150dp'
                             GridLayout:
                                 id: grid
                                 rows: 1
@@ -620,19 +694,19 @@ kv = '''
                                 spacing:dp(20)
                                 row_default_height: 1
                                 Recipee:
-                                    source:'onio.jpg'
+                                    source:'assets/pics/onio.jpg'
                                     name:'Onion'
                                     quantity:'2 Chopped'
                                 Recipee:
-                                    source:'spinach.jpg'
+                                    source:'assets/pics/spinach.jpg'
                                     name:'Spinach'
                                     quantity:'3 leaves'
                                 Recipee:
-                                    source:'chilli.jpg'
+                                    source:'assets/pics/chilli.jpg'
                                     name:'Chille'
                                     quantity:'1 teaspoon'
                                 Recipee:
-                                    source:'tomato.jpg'
+                                    source:'assets/pics/tomato.jpg'
                                     name:'Tomato'
                                     quantity:'2 Chopped'
                                 Recipee:
@@ -811,6 +885,7 @@ kv = '''
 
     
 '''
+import fontawesome
 class VegButton(ButtonBehavior, MDLabel):
     # def on_press(self):
     #     self.parent.parent.screen_manager.current = self.screen
@@ -846,6 +921,10 @@ class Recipe(Screen):
         self.manager.current = 'Home'
 
 class MainWindow(Screen):
+    textt = "The technique is similar to risotto. After softening the noodles in boiling water, you finish cooking them in a saute pan with the sauce, adding ladles of the pasta water until they are done. “That’s flour, egg, flavor you’re adding,” Clevenger says. Vigorous stirring creates an emulsion that allows the sauce to coat each strand. As with risotto, the tricky part is stopping before the noodles overcook."
+    text_splt = textt.split()
+    ex_text = None
+
     def go_back(self):
         self.ids.exit.parent.screen_manager.current = 'Login'
     def go_Home(self):
@@ -853,6 +932,25 @@ class MainWindow(Screen):
     
     def go_Recipe(self):
         self.ids.Recipe.parent.screen_manager.current = 'Recipe'
+        
+        fontIcon = "[font=assets/fonts/fontawesome.ttf]" +  "  " + eval(self.ids.reccipe.icon) +"[/font]"
+        
+        i = 19
+        print(self.text_splt[i])
+        self.check_agn(i,self.text_splt)
+        
+        self.ids.reccipe.text = self.ex_text + '[ref=world][color=64dd17]'+"read more"+fontIcon+'[/color][/ref]'
+        self.ids.reccipe.markup = True
+    
+    def check_agn(self,i,text_splt):
+        fnal_textt = text_splt[i]
+        if text_splt.count(fnal_textt) > 1:
+            i-=1
+            self.check_agn(i,self.text_splt)
+            
+        else:
+            # fnal_textt = text_splt[i]
+            self.ex_text = self.textt.split(text_splt[i])[0]
 
     open_field_box = 0
     increment_width = NumericProperty(0)
